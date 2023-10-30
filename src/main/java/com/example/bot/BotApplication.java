@@ -1,13 +1,18 @@
 package com.example.bot;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class BotApplication {
+@AutoConfigurationPackage
+public class BotApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BotApplication.class, args);
+
+		new SpringApplicationBuilder(BotApplication.class).run(args);
 	}
 
 }
