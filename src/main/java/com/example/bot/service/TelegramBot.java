@@ -38,8 +38,6 @@ public class TelegramBot extends TelegramLongPollingBot {
     static final int MAX_JOKE_ID_MINUS_ONE = 3772;
     static final String NEXT_JOKE = "NEXT_JOKE";
 
-    static final String ERROR_TEXT = "Error occurred: ";
-
     static final String HELP_TEXT =
             "This is an example bot based on Spring Boot framework.\n" +
                     "You can execute commands from the main menu on the left or by typing a command:\n" +
@@ -94,17 +92,12 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                 }
 
-
                 case "/help" ->
                     sendMessage(HELP_TEXT, chatId);
 
                 case "/joke" -> {
-
                     var joke = getRandomJoke();
-
                     joke.ifPresent(randomJoke -> addButtonAndSendMessage(randomJoke.getBody(), chatId));
-
-
                 }
                 default -> commandNotFound(chatId);
             }
@@ -116,13 +109,8 @@ public class TelegramBot extends TelegramLongPollingBot {
             long chatId = update.getCallbackQuery().getMessage().getChatId();
 
             if(callbackData.equals(NEXT_JOKE)) {
-
                 var joke = getRandomJoke();
-
-                //joke.ifPresent(randomJoke -> addButtonAndSendMessage(randomJoke.getBody(), chatId));
-
                 joke.ifPresent(randomJoke -> addButtonAndEditText(randomJoke.getBody(), chatId, update.getCallbackQuery().getMessage().getMessageId()));
-
             }
 
         }
@@ -130,12 +118,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void showStart(long chatId, String name) {
         String answer = EmojiParser.parseToUnicode(
-                "Hi, " + name + "! :smile:" + " Nice to meet you! I am a Simple Random Joke Bot created by Dmitrijs Finaskins from proj3c.io \n");
+                "Heyo, " + name + "!" + " Nice to meet you! I am a Simple Random Joke Bot created by Linkshegelianer as a study project \n");
         sendMessage(answer, chatId);
     }
 
     private void sendMessage(String textToSend, long chatId) {
-        SendMessage message = new SendMessage(); // Create a message object object
+        SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
         message.setText(textToSend);
         send(message);
@@ -143,24 +131,15 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void send(SendMessage msg) {
         try {
-            execute(msg); // Sending our message object to user
+            execute(msg);
         } catch (TelegramApiException e) {
             log.error(Arrays.toString(e.getStackTrace()));
         }
     }
 
-//    private void executeMessage(SendMessage message){
-//        try {
-//            execute(message);
-//        } catch (TelegramApiException e) {
-//            log.error(ERROR_TEXT + e.getMessage());
-//        }
-//    }
-
     private Optional<Joke> getRandomJoke(){
         var r = new Random();
         var randomId = r.nextInt(MAX_JOKE_ID_MINUS_ONE) + 1;
-
         return jokeRepository.findById(randomId);
     }
 
@@ -214,7 +193,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void sendEditMessageText(EditMessageText msg) {
         try {
-            execute(msg); // Sending our message object to user
+            execute(msg);
         } catch (TelegramApiException e) {
             log.error(Arrays.toString(e.getStackTrace()));
         }

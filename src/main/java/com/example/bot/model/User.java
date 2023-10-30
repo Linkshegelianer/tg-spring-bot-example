@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Entity(name = "usersDataTable") // This tells Hibernate to make a table out of this class
+@Entity(name = "usersDataTable")
 @Data
 public class User {
 
