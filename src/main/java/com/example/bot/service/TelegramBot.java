@@ -44,8 +44,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     "/start to see a welcome message\n" +
                     "/mydata to see your stored data\n" +
                     "/deletedata to delete your data from the bot\n" +
-                    "/settings to set your preferences\n" +
-                    "/easteregg to see an easter egg in the bot\n";
+                    "/settings to set your preferences\n";
 
     public TelegramBot(BotConfig botConfig) {
         this.config = botConfig;
@@ -56,7 +55,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         listOfCommands.add(new BotCommand("/deletedata", "delete your data"));
         listOfCommands.add(new BotCommand("/help", "info how to use this bot"));
         listOfCommands.add(new BotCommand("/settings", "set your preferences"));
-        listOfCommands.add(new BotCommand("/easteregg", "see a little easter egg!"));
         try {
             this.execute(new SetMyCommands(listOfCommands, new BotCommandScopeDefault(), null));
         } catch (TelegramApiException e) {
@@ -198,4 +196,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             log.error(Arrays.toString(e.getStackTrace()));
         }
     }
+
+    // TODO: parse received message
+    // TODO: check code logic
 }

@@ -24,4 +24,4 @@ jobs:
           gradle-version: 8.2
 
       - run: chmod +x gradlew
-      - run: gradlew build
+      - run: gradlew assemble

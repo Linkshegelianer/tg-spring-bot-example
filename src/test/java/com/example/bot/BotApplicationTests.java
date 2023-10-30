@@ -10,4 +10,7 @@ class BotApplicationTests {
 	void contextLoads() {
 	}
 
+	// test case: get greeting
+	// test case: get joke. the joke will appear after the message "here's the joke"
+	// test case: get help message
 }
