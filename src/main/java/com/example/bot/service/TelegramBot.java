@@ -38,6 +38,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     static final int MAX_JOKE_ID_MINUS_ONE = 3772;
     static final String NEXT_JOKE = "NEXT_JOKE";
 
+    static final String MESSAGE_FOR_TEST = "Here's the joke: \n \n";
+
     static final String HELP_TEXT =
             "This is an example bot based on Spring Boot framework.\n" +
                     "You can execute commands from the main menu on the left or by typing a command:\n" +
@@ -144,7 +146,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private void addButtonAndSendMessage(String joke, long chatId){
 
         SendMessage message = new SendMessage();
-        message.setText(joke);
+        message.setText(MESSAGE_FOR_TEST + joke);
         message.setChatId(chatId);
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
@@ -165,7 +167,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         EditMessageText message = new EditMessageText();
         message.setChatId(chatId);
-        message.setText(joke);
+        message.setText(MESSAGE_FOR_TEST + joke);
         message.setMessageId(messageId);
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
@@ -197,6 +199,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    // TODO: parse received message
+
     // TODO: check code logic
 }
